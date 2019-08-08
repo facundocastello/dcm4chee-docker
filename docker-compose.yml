@@ -7,3 +7,7 @@ services:
       - "11112:11112"
     volumes:
       - ./dcm4chee-2.18.3-mysql:/var/local/dcm4chee/dcm4chee-2.18.3-mysql
+      - ./database:/var/lib/mysql
+volumes:
+  database:
+    

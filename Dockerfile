@@ -17,7 +17,7 @@ RUN curl https://raw.githubusercontent.com/nroduit/mvn-repo/master/org/weasis/th
 # Create databases and import
 ADD stage stage
 RUN chmod 755 stage/*.bash
-RUN cd stage; ./create-database.bash
+# RUN cd stage; ./create-database.bash
 
 # Update environment variables
 RUN echo "\

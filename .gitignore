@@ -7,3 +7,4 @@ dcm4chee-2.18.3-mysql/server/default/wadocachedata/*
 dcm4chee-2.18.3-mysql/server/default/wadocachejournal/*
 dcm4chee-2.18.3-mysql/server/default/work/*
 dcm4chee-2.18.3-mysql/server/default/data/*
+database/*

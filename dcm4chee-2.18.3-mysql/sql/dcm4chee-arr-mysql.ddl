@@ -10,7 +10,7 @@
         audit_record_fk bigint,
         role_id_fk bigint,
         primary key (pk)
-    ) type=InnoDB;
+    ) engine=InnoDB;
 
     create table audit_record (
         pk bigint not null auto_increment,
@@ -26,7 +26,7 @@
         event_type_fk bigint,
         event_id_fk bigint,
         primary key (pk)
-    ) type=InnoDB;
+    ) engine=InnoDB;
 
     create table code (
         pk bigint not null auto_increment,
@@ -35,7 +35,7 @@
         code_value varchar(255) not null,
         primary key (pk),
         unique (code_value, code_designator)
-    ) type=InnoDB;
+    ) engine=InnoDB;
 
     create table part_obj (
         pk bigint not null auto_increment,
@@ -49,7 +49,7 @@
         obj_id_type_fk bigint,
         audit_record_fk bigint,
         primary key (pk)
-    ) type=InnoDB;
+    ) engine=InnoDB;
 
     alter table active_part 
         add index FKC154118C9F9901B4 (role_id_fk), 
