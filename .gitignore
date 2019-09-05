@@ -1,4 +1,5 @@
 dcm4chee-2.18.3-mysql/server/default/archive/*
+dcm4chee-2.18.3-mysql/server/default/IMATEC/*
 dcm4chee-2.18.3-mysql/server/default/log/*
 dcm4chee-2.18.3-mysql/server/default/tar-extracted/*
 dcm4chee-2.18.3-mysql/server/default/tar-extracted-journal/*
@@ -8,3 +9,4 @@ dcm4chee-2.18.3-mysql/server/default/wadocachejournal/*
 dcm4chee-2.18.3-mysql/server/default/work/*
 dcm4chee-2.18.3-mysql/server/default/data/*
 database/*
+samples/*

@@ -1,13 +1,31 @@
-version: "3"
+version: '3'
 services:
   pacs:
     build: .
     ports:
-      - "8080:8080"
-      - "11112:11112"
+      - 8080:8080
+      - 11112:11112
     volumes:
       - ./dcm4chee-2.18.3-mysql:/var/local/dcm4chee/dcm4chee-2.18.3-mysql
       - ./database:/var/lib/mysql
+  webviewer:
+    build: ./WebViewer
+    container_name: webviewer
+    volumes:
+      - ./WebViewer/webviewer-api:/usr/src/app/webviewer-api
+      - ./WebViewer/webviewer-ui:/usr/src/app/webviewer-ui
+      - ./WebViewer/dcm4che:/usr/src/app/dcm4che
+      - /usr/src/app/webviewer-api/node_modules
+      - /usr/src/app/webviewer-ui/node_modules
+    ports:
+      - 80:80
+      - 443:443
+      - 3000:3000
+      - 9229:9229
+    command: tail -F anything
+    links:
+      - pacs
+    depends_on:
+      - pacs
 volumes:
   database:
-    

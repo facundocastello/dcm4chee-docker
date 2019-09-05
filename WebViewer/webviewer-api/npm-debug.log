@@ -1,0 +1,52 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/usr/bin/npm', 'install' ]
+info using npm@1.1.4
+info using node@v0.6.12
+verbose config file /root/.npmrc
+verbose config file /usr/etc/npmrc
+verbose config file /usr/share/npm/npmrc
+verbose caching /usr/src/app/webviewer-api/package.json
+verbose loadDefaults webviewer-api@1.0.0
+verbose readDependencies: using package.json deps
+verbose where, deps [ '/usr/src/app/webviewer-api', [ 'express' ] ]
+verbose from cache /usr/src/app/webviewer-api/package.json
+info preinstall webviewer-api@1.0.0
+verbose from cache /usr/src/app/webviewer-api/package.json
+verbose readDependencies: using package.json deps
+verbose cache add [ 'express@^4.17.1', null ]
+silly cache add: name, spec, args [ undefined, 'express@^4.17.1', [ 'express@^4.17.1', null ] ]
+verbose parsed url { pathname: 'express@^4.17.1',
+verbose parsed url   path: 'express@^4.17.1',
+verbose parsed url   href: 'express@^4.17.1' }
+silly cache add: name, spec, args [ 'express', '^4.17.1', [ 'express', '^4.17.1' ] ]
+verbose parsed url { pathname: '^4.17.1', path: '^4.17.1', href: '^4.17.1' }
+verbose addNamed [ 'express', '^4.17.1' ]
+verbose addNamed [ null, null ]
+info addNameTag [ 'express', '^4.17.1' ]
+verbose raw, before any munging express
+verbose url resolving [ 'https://registry.npmjs.org/', './express' ]
+verbose url resolved https://registry.npmjs.org/express
+http GET https://registry.npmjs.org/express
+ERR! Error: failed to fetch from registry: express
+ERR!     at /usr/share/npm/lib/utils/npm-registry-client/get.js:139:12
+ERR!     at cb (/usr/share/npm/lib/utils/npm-registry-client/request.js:31:9)
+ERR!     at Request._callback (/usr/share/npm/lib/utils/npm-registry-client/request.js:136:18)
+ERR!     at Request.callback (/usr/lib/nodejs/request/main.js:119:22)
+ERR!     at Request.<anonymous> (/usr/lib/nodejs/request/main.js:212:58)
+ERR!     at Request.emit (events.js:88:20)
+ERR!     at ClientRequest.<anonymous> (/usr/lib/nodejs/request/main.js:412:12)
+ERR!     at ClientRequest.emit (events.js:67:17)
+ERR!     at HTTPParser.onIncoming (http.js:1261:11)
+ERR!     at HTTPParser.onHeadersComplete (http.js:102:31)
+ERR! You may report this log at:
+ERR!     <http://bugs.debian.org/npm>
+ERR! or use
+ERR!     reportbug --attach /usr/src/app/webviewer-api/npm-debug.log npm
+ERR! 
+ERR! System Linux 5.0.0-25-generic
+ERR! command "node" "/usr/bin/npm" "install"
+ERR! cwd /usr/src/app/webviewer-api
+ERR! node -v v0.6.12
+ERR! npm -v 1.1.4
+ERR! message failed to fetch from registry: express
+verbose exit [ 1, true ]
