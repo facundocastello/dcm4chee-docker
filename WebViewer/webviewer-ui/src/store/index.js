@@ -1,10 +1,10 @@
 import { combineReducers, createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-import samples from "./samples";
+import studies from "./studies";
 import ui from "./ui";
 
 const reducer = combineReducers({
-  samples: samples,
+  studies: studies,
   ui: ui
 });
 

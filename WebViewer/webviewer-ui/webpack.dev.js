@@ -5,7 +5,7 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
 module.exports = {
   entry: [
     'babel-polyfill',
-    'webpack-dev-server/client?http://0.0.0.0:3000',
+    'webpack-dev-server/client?http://0.0.0.0:4000',
     './src'
   ],
   devServer: {

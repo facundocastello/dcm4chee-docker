@@ -10,3 +10,5 @@ dcm4chee-2.18.3-mysql/server/default/work/*
 dcm4chee-2.18.3-mysql/server/default/data/*
 database/*
 samples/*
+WebViewer/webviewer-ui/node_modules/*
+WebViewer/webviewer-api/node_modules/*
