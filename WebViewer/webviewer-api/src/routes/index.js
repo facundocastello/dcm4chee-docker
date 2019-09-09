@@ -1,0 +1,1 @@
+exports.studies = require("./studies");

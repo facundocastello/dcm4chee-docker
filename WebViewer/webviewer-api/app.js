@@ -1,20 +1,38 @@
-var express = require('express');
+const express = require('express');
+
+const routes = require('./src/routes/index');
+
 var app = express();
 
-app.get('/', function(req, res) {
-  const { exec } = require('child_process');
-  exec('../dcm4che/bin/dcmqr IMATECSVR@192.168.0.27:11112', (err, stdout, stderr) => {
-    if (err) {
-      // node couldn't execute the command
-      return;
-    }
-
-    // the *entire* stdout and stderr (buffered)
-    console.log(`stdout: ${stdout}`);
-    console.log(`stderr: ${stderr}`);
-  });
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*'); // update to match the domain you will make the request from
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
 });
 
-app.listen(3000, function() {
-  console.log('Example app listening on port 3000!');
+for (index in routes) {
+  app.use(`/${index}`, routes[index]);
+}
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
 });
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+});
+
+process.on('uncaughtException', function(err) {
+  console.log(err);
+});
+
+module.exports = app;
