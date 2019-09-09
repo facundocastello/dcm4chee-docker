@@ -7,9 +7,13 @@ const initialState = {
   studies: []
 };
 
-export const loadStudies = ({ filters }) => dispatch => {
+export const loadStudies = ({ filters }) => (dispatch, getState) => {
+  const form = getState().forms.forms['search-study'];
+  form.PatientName = form.PatientName && `*${form.PatientName}*`;
   axios
-    .get(`http://192.168.0.27:3000/studies`, { params: filters })
+    .get(`http://192.168.0.27:3000/studies`, {
+      params: { ...form, ...filters }
+    })
     .then(res => {
       dispatch(receiveStudies(res.data));
     });

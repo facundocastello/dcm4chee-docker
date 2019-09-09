@@ -1,3 +1,5 @@
+$medytec: rgb(0, 131, 93);
+
 .App {
 }
 
@@ -11,6 +13,20 @@
   height: 150px;
   padding: 20px;
   color: white;
+}
+
+.logo {
+  border-radius: 100px;
+  background: $medytec;
+  padding: 5px;
+}
+
+.bg-medytec {
+  background: $medytec;
+}
+
+.text-medytec {
+  color: $medytec;
 }
 
 .App-intro {

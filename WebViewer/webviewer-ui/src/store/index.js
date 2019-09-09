@@ -1,9 +1,11 @@
 import { combineReducers, createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
+import forms from "./forms";
 import studies from "./studies";
 import ui from "./ui";
 
 const reducer = combineReducers({
+  forms: forms,
   studies: studies,
   ui: ui
 });
