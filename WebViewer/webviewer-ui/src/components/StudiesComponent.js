@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import classnames from "classnames";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import classnames from 'classnames';
 
-import { loadStudies } from "../store/studies";
-import { formatDate } from "../utils/dates";
-import CustomForm from "./CustomForm";
+import { loadStudies } from '../store/studies';
+import { formatDate } from '../utils/dates';
+import CustomForm from './CustomForm';
 
 class StudiesComponent extends Component {
   state = {
-    studyParent: "",
-    studyName: "",
-    pouch: "",
+    studyParent: '',
+    studyName: '',
+    pouch: '',
     users: [],
     showCards: false
   };
@@ -24,10 +24,23 @@ class StudiesComponent extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  renderInstances = () => {
+    return this.props.studies.map(study => (
+      <a
+        href={`http://localhost:8080/wado?requestType=WADO&studyUID=${study.StudyInstanceUID}&seriesUID=${study.SeriesInstanceUID}&objectUID=${study.SOPInstanceUID}`}
+      >
+        <img
+          className='m-1'
+          src={`http://localhost:8080/wado?requestType=WADO&studyUID=${study.StudyInstanceUID}&seriesUID=${study.SeriesInstanceUID}&objectUID=${study.SOPInstanceUID}&columns=256`}
+        />
+      </a>
+    ));
+  };
+
   renderStudiesCards = () => {
     const studies = this.props.studies.map(study => (
       <div
-        className="col-12 col-md-4"
+        className='col-12 col-md-4'
         onClick={() =>
           this.props.loadStudies({
             filters: {
@@ -37,51 +50,43 @@ class StudiesComponent extends Component {
           })
         }
       >
-        <div className="row border m-2 rounded">
-          <div className="col-12 bg-medytec py-1">
+        <div className='row border m-2 rounded'>
+          <div className='col-12 bg-medytec py-1'>
             {study.PatientName}
             {formatDate(study.StudyDate) && ` - ${formatDate(study.StudyDate)}`}
           </div>
-          <div className="col-6">
+          <div className='col-6'>
             <strong>Modality:</strong> {study.ModalitiesInStudy}
           </div>
           {study.NumberofStudyRelatedSeries && (
-            <div className="col-6">
-              <strong>Related Series:</strong>{" "}
+            <div className='col-6'>
+              <strong>Related Series:</strong>{' '}
               {study.NumberofStudyRelatedSeries}
             </div>
           )}
           {study.NumberofStudyRelatedInstances && (
-            <div className="col-6">
-              <strong>Related Instances:</strong>{" "}
+            <div className='col-6'>
+              <strong>Related Instances:</strong>{' '}
               {study.NumberofStudyRelatedInstances}
             </div>
           )}
           {study.NumberofSeriesRelatedInstances && (
-            <div className="col-6">
-              <strong>Related Instances:</strong>{" "}
+            <div className='col-6'>
+              <strong>Related Instances:</strong>{' '}
               {study.NumberofSeriesRelatedInstances}
             </div>
-          )}
-          {study.SOPInstanceUID && (
-            <a
-              href={`http://localhost:8080/wado?requestType=WADO&studyUID=${study.StudyInstanceUID}&seriesUID=${study.SeriesInstanceUID}&objectUID=${study.SOPInstanceUID}`}
-            >
-              <img
-                src={`http://localhost:8080/wado?requestType=WADO&studyUID=${study.StudyInstanceUID}&seriesUID=${study.SeriesInstanceUID}&objectUID=${study.SOPInstanceUID}&columns=128`}
-              />
-            </a>
           )}
         </div>
       </div>
     ));
-    return <div className="row pt-4">{studies}</div>;
+    return <div className='row pt-4'>{studies}</div>;
   };
 
   renderStudiesTable = () => {
+    const { level } = this.props;
     const studies = this.props.studies.map(study => (
       <div
-        className="row"
+        className='row'
         onClick={() =>
           this.props.loadStudies({
             filters: {
@@ -91,49 +96,40 @@ class StudiesComponent extends Component {
           })
         }
       >
-        <div className="border col-3 py-1">
+        <div className='border col-3 py-1'>
           {study.PatientName}
           {formatDate(study.StudyDate) && ` - ${formatDate(study.StudyDate)}`}
         </div>
-        <div className="border col-3">
-          <strong>Modality:</strong> {study.ModalitiesInStudy}
-        </div>
+        <div className='border col-3'>{study.ModalitiesInStudy}</div>
         {study.NumberofStudyRelatedSeries && (
-          <div className="border col-3">{study.NumberofStudyRelatedSeries}</div>
+          <div className='border col-3'>{study.NumberofStudyRelatedSeries}</div>
         )}
         {study.NumberofStudyRelatedInstances && (
-          <div className="border col-3">
+          <div className='border col-3'>
             {study.NumberofStudyRelatedInstances}
           </div>
         )}
         {study.NumberofSeriesRelatedInstances && (
-          <div className="border col-3">
+          <div className='border col-3'>
             {study.NumberofSeriesRelatedInstances}
           </div>
-        )}
-        {study.SOPInstanceUID && (
-          <a
-            href={`http://localhost:8080/wado?requestType=WADO&studyUID=${study.StudyInstanceUID}&seriesUID=${study.SeriesInstanceUID}&objectUID=${study.SOPInstanceUID}`}
-          >
-            <img
-              src={`http://localhost:8080/wado?requestType=WADO&studyUID=${study.StudyInstanceUID}&seriesUID=${study.SeriesInstanceUID}&objectUID=${study.SOPInstanceUID}&columns=128`}
-            />
-          </a>
         )}
       </div>
     ));
 
     return (
-      <div className=" pt-4">
-        <div className="row">
-          <div className="bg-medytec border col-3 font-weight-bold">Name</div>
-          <div className="bg-medytec border col-3 font-weight-bold">
+      <div className=' pt-4'>
+        <div className='row'>
+          <div className='bg-medytec border col-3 font-weight-bold'>Name</div>
+          <div className='bg-medytec border col-3 font-weight-bold'>
             Modality
           </div>
-          <div className="bg-medytec border col-3 font-weight-bold">
-            Related Series
-          </div>
-          <div className="bg-medytec border col-3 font-weight-bold">
+          {level === 'study' && (
+            <div className='bg-medytec border col-3 font-weight-bold'>
+              Related Series
+            </div>
+          )}
+          <div className='bg-medytec border col-3 font-weight-bold'>
             Related Instances
           </div>
         </div>
@@ -143,49 +139,71 @@ class StudiesComponent extends Component {
   };
 
   render() {
-    const { studies } = this.props;
+    const { level, studies } = this.props;
     const { showCards } = this.state;
 
     return (
       <div>
-        <div className="d-flex justify-content-around">
-          <div className="w-90 mt-4">
-            <h1 className="rounded text-center bg-medytec">Studies</h1>
+        <div className='d-flex justify-content-around'>
+          <div className='w-90 mt-4'>
+            <h1 className='rounded text-center bg-medytec'>Studies</h1>
 
             <CustomForm
-              formName="search-study"
-              formButton="Search"
+              formName='search-study'
+              formButton='Search'
               actionSubmit={() => this.props.loadStudies({})}
               formItems={{
                 InstanceNumber: {
-                  title: "Instance Number"
+                  title: 'Instance Number'
                 },
                 InstanceAvailability: {
-                  title: "Instance Availability"
+                  title: 'Instance Availability'
                 },
                 PatientName: {
-                  title: "Patient Name"
+                  title: 'Patient Name'
                 },
                 StudyDate: {
-                  title: "Study Date"
+                  title: 'Study Date'
+                },
+                ModalitiesInStudy: {
+                  title: 'Modalities In Study'
                 }
               }}
             />
-            <div
-              onClick={() => this.setState(prevState => ({
-                showCards: !prevState.showCards
-              }))}
-            >
-              Toggle Cards
+            <div className='d-none d-md-flex justify-content-end'>
+              <div
+                className='text-medytec badge border p-2'
+                onClick={() =>
+                  this.setState(prevState => ({
+                    showCards: !prevState.showCards
+                  }))
+                }
+              >
+                {showCards ? (
+                  <i className='fa fa-2x fa-list'></i>
+                ) : (
+                  <i class='fa fa-2x fa-id-card-o' aria-hidden='true'></i>
+                )}
+              </div>
             </div>
-            <div
-              className={classnames(showCards ? "d-none" : "d-none d-md-block")}
-            >
-              {this.renderStudiesTable()}
-            </div>
-            <div className={classnames(showCards ? "d-block" : "d-md-none")}>
-              {this.renderStudiesCards()}
-            </div>
+            {level === 'instance' ? (
+              this.renderInstances()
+            ) : (
+              <div>
+                <div
+                  className={classnames(
+                    showCards ? 'd-none' : 'd-none d-md-block'
+                  )}
+                >
+                  {this.renderStudiesTable()}
+                </div>
+                <div
+                  className={classnames(showCards ? 'd-block' : 'd-md-none')}
+                >
+                  {this.renderStudiesCards()}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
