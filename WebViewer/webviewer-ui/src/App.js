@@ -8,6 +8,7 @@ import StudiesComponent from './components/StudiesComponent';
 import store from './store';
 import './App.scss';
 import Errors from './components/Errors';
+import ViewerComponent from './components/ViewerComponent';
 
 axios.defaults.headers.common['Content-Type'] =
   'application/x-www-form-urlencoded';
@@ -43,7 +44,8 @@ class App extends Component {
               </div>
             </div>
             <Errors />
-            <Route path='/' component={StudiesComponent} />
+            <Route exact path='/' component={StudiesComponent} />
+            <Route path='/viewer' component={ViewerComponent} />
           </div>
         </Router>
       </Provider>

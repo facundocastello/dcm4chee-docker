@@ -11,7 +11,6 @@ const initialState = {
 export const loadStudies = ({ filters }) => (dispatch, getState) => {
   const form = getState().forms.forms['search-study'];
   Object.keys(form).forEach(index => {
-    debugger;
     if (form[index] === undefined || form[index] === '') {
       delete form[index];
     } else if (index === 'PatientName') {
@@ -37,7 +36,6 @@ function reducer(state = initialState, action) {
     case RECEIVE_STUDIES:
       var level = '';
       if (action.studies.length) {
-        debugger;
         level = action.studies[0].NumberofStudyRelatedSeries
           ? 'study'
           : action.studies[0].NumberofSeriesRelatedInstances

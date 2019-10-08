@@ -51,3 +51,11 @@ $medytec: rgb(0, 131, 93);
 .w-90 {
   width: 90%;
 }
+
+[class^='col-'],
+[class*='col-'] {
+    -webkit-transition: all 0.6s ease-in-out;
+    -moz-transition: all 0.6s ease-in-out;
+    -o-transition: all 0.6s ease-in-out;
+    transition: all 0.6s ease-in-out;
+}

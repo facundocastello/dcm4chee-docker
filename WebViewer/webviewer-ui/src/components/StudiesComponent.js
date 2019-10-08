@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 
@@ -25,21 +26,26 @@ class StudiesComponent extends Component {
   };
 
   renderInstances = () => {
-    return this.props.studies.map(study => (
-      <a
-        href={`http://localhost:8080/wado?requestType=WADO&studyUID=${study.StudyInstanceUID}&seriesUID=${study.SeriesInstanceUID}&objectUID=${study.SOPInstanceUID}`}
+    return this.props.studies.map((study, index) => (
+      <Link
+        key={`image-${index}`}
+        to={{
+          pathname: `/viewer`,
+          query: { selectedStudyIndex: index }
+        }}
       >
         <img
           className='m-1'
           src={`http://localhost:8080/wado?requestType=WADO&studyUID=${study.StudyInstanceUID}&seriesUID=${study.SeriesInstanceUID}&objectUID=${study.SOPInstanceUID}&columns=256`}
         />
-      </a>
+      </Link>
     ));
   };
 
   renderStudiesCards = () => {
-    const studies = this.props.studies.map(study => (
+    const studies = this.props.studies.map((study, index) => (
       <div
+        key={`study-card-${index}`}
         className='col-12 col-md-4'
         onClick={() =>
           this.props.loadStudies({
@@ -84,8 +90,9 @@ class StudiesComponent extends Component {
 
   renderStudiesTable = () => {
     const { level } = this.props;
-    const studies = this.props.studies.map(study => (
+    const studies = this.props.studies.map((study,index) => (
       <div
+        key={`study-table-${index}`}
         className='row'
         onClick={() =>
           this.props.loadStudies({
@@ -182,7 +189,7 @@ class StudiesComponent extends Component {
                 {showCards ? (
                   <i className='fa fa-2x fa-list'></i>
                 ) : (
-                  <i class='fa fa-2x fa-id-card-o' aria-hidden='true'></i>
+                  <i className='fa fa-2x fa-id-card-o' aria-hidden='true'></i>
                 )}
               </div>
             </div>
