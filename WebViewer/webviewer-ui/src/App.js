@@ -18,7 +18,10 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className='App'>
-            <div className='d-flex justify-content-center px-5 py-3 w-100 bg-dark'>
+            <div
+              className='d-flex justify-content-center px-5 py-3 w-100 bg-dark'
+              style={{ zIndex: 1000, position: 'relative' }}
+            >
               <div className='align-items-center d-flex justify-content-between  w-75'>
                 <div className='shop-isle-header-title-inner'>
                   <a
@@ -40,7 +43,7 @@ class App extends Component {
                 <div className='d-flex font-weight-bold w-50 justify-content-around'>
                   <Link to='/'>Studies</Link>
                 </div>
-                <div className='text-white' >Users</div>
+                <div className='text-white'>Users</div>
               </div>
             </div>
             <Errors />
